@@ -1,9 +1,9 @@
 # IDE files
-.idea/
+.idea
 .idea/*
 
 # Build files
-.gradle/
+.gradle
 .gradle/*
-build/
+build
 build/*
