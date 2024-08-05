@@ -1,0 +1,27 @@
+name: MLHub
+version: '1.0-SNAPSHOT'
+main: com.magoliopoli.mLHub.MLHub
+api-version: '1.21'
+authors: [ MagoLione ]
+description: A dull hub plugin.
+website: https://magoliopoli.com
+
+softdepend: ['Essentials', 'Multiverse-Core', 'Multiverse-Inventories']
+
+commands:
+  mlhub:
+    description: MLHub's commands.
+  hub:
+    description: Teleport to the hub.
+    permission: MLHub.command.hub
+
+permissions:
+  MLHub.hubInventoryAccess:
+    description: Gives access to modify the hub inventory.
+    default: op
+  MLHub.command.reload:
+    description: Gives access to reload command.
+    default: op
+  MLHub.command.hub:
+    description: Gives access to hub command.
+    default: true
