@@ -1,6 +1,6 @@
 package com.magoliopoli.mLHub.config
 
-import com.magoliopoli.mLHub.Log
+import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
 import com.magoliopoli.mLHub.config.Engine.Companion.getEngine
 import com.magoliopoli.mLHub.config.MLHubConfig.Companion.getItemStackByString
 import com.magoliopoli.mLHub.config.MLHubConfig.Companion.stripColorCodes

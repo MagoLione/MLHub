@@ -1,6 +1,6 @@
 package com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds
 
-import com.magoliopoli.mLHub.Log.Companion.fullELog
+import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log.Companion.fullELog
 import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.HUB
 import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.PERMS_PREFIX
 import com.magoliopoli.mLHub.config.MLHubConfig

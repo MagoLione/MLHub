@@ -1,6 +1,6 @@
 package com.magoliopoli.mLHub.config
 
-import com.magoliopoli.mLHub.Log
+import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
 import com.magoliopoli.mLHub.config.Engine.Companion.getEngine
 import org.bukkit.Bukkit.getServer
 import org.bukkit.Bukkit.getWorld

@@ -1,5 +1,6 @@
 package com.magoliopoli.mLHub
 
+import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
 import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.HubCommand
 import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands
 import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.CMDS_PREFIX
