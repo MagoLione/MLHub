@@ -21,7 +21,7 @@ enum class Engine {
     companion object {
         private const val STANDARD_STR = "standard"
         private const val MULTIVERSE_STR = "multiverse"
-        private const val MULTIVERSE_LASTLOCATION_STR = "multiverse-lastLocation"
+        private const val MULTIVERSE_LASTLOCATION_STR = "multiverse-lastlocation"
         private const val ESSENTIALS_STR = "essentials"
 
         private fun getEngineByString(type: String, invalidValue: String): Engine {
