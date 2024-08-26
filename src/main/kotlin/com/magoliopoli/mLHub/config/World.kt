@@ -17,6 +17,7 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
         const val ITEM = "item"
         const val POSITION = "position"
         const val ENGINE = "engine"
+        const val BYPASS_LAST_POSITION = "bypass-last-position"
     }
 
     val worldOrWarpName: String = world
@@ -25,6 +26,7 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
     val item: ItemStack
     val position: Int
     val engine: Engine
+    val bypassLastPosition: Boolean
 
 
     init {
@@ -50,10 +52,11 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
 
         this.position = config.getInt(subPath(POSITION))
         this.engine = config.getEngine(subPath(ENGINE), "$ENGINE (in $worldOrWarpName)")
+        this.bypassLastPosition = config.getBoolean(subPath(BYPASS_LAST_POSITION))
     }
 
     fun tpByEngine(mlConfig: MLHubConfig, humanEntity: HumanEntity): Boolean {
-        return this.engine.tpByEngine(mlConfig, humanEntity, worldOrWarpName)
+        return this.engine.tpByEngine(mlConfig, humanEntity, worldOrWarpName, bypassLastPosition)
     }
 
     fun isItemEquals(displayName: String?, lore: List<String>?, material: Material): Boolean {

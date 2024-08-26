@@ -18,7 +18,7 @@ class HubCommand(private val mlConfig: MLHubConfig): CommandExecutor {
             sender.sendMessage("${ChatColor.GOLD}Teleporting to the hub...")
 
             if (mlConfig.hubWarp != null) {
-                mlConfig.hubTpEngine.tpByEngine(mlConfig, sender, mlConfig.hubWarp)
+                mlConfig.hubTpEngine.tpByEngine(mlConfig, sender, mlConfig.hubWarp, mlConfig.hubTpBypassLastPosition)
             } else fullELog(
                 consoleMessage = "An error occurred trying to use EssentialsX as hub teleport engine: hub-warp is not setted.",
                 humanEntity = sender

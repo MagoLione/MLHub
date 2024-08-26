@@ -15,20 +15,17 @@ import org.bukkit.entity.Player
 enum class Engine {
     STANDARD,
     MULTIVERSE,
-    MULTIVERSE_LASTLOCATION,
     ESSENTIALS;
 
     companion object {
         private const val STANDARD_STR = "standard"
         private const val MULTIVERSE_STR = "multiverse"
-        private const val MULTIVERSE_LASTLOCATION_STR = "multiverse-lastlocation"
         private const val ESSENTIALS_STR = "essentials"
 
         private fun getEngineByString(type: String, invalidValue: String): Engine {
             return when (type.lowercase()) {
                 STANDARD_STR -> STANDARD
                 MULTIVERSE_STR -> MULTIVERSE
-                MULTIVERSE_LASTLOCATION_STR -> MULTIVERSE_LASTLOCATION
                 ESSENTIALS_STR -> ESSENTIALS
                 else -> {
                     Log.v(
@@ -46,12 +43,19 @@ enum class Engine {
 
     }
 
-    fun tpByEngine(mlConfig: MLHubConfig, humanEntity: HumanEntity, worldOrWarpName: String): Boolean {
+    fun tpByEngine(
+        mlConfig: MLHubConfig,
+        humanEntity: HumanEntity,
+        worldOrWarpName: String,
+        bypassLastPosition: Boolean,
+        isHub: Boolean = false
+    ): Boolean {
         val status = when (this) {
             STANDARD -> {
                 val world = Bukkit.getWorld(worldOrWarpName)
                 if (world != null) {
                     humanEntity.teleport(world.spawnLocation)
+                    if (bypassLastPosition) humanEntity.teleport(world.spawnLocation)
                     true
                 } else fullELog(
                     consoleMessage = "An error occurred getting bukkit world. Check worlds' names in the config.yml.",
@@ -69,33 +73,8 @@ enum class Engine {
 
                     if (mvWorld != null) {
                         humanEntity.teleport(mvWorld.spawnLocation)
+                        if (bypassLastPosition) humanEntity.teleport(mvWorld.spawnLocation)
                         true
-                    } else fullELog(
-                        consoleMessage = "An error occurred getting mvWorld.",
-                        humanEntity = humanEntity
-                    ).addReturn()
-                } else fullELog(
-                    consoleMessage = "An error occurred getting Multiverse-Core instance. Verify the installation of the plugin.",
-                    humanEntity = humanEntity
-                ).addReturn()
-            }
-
-            MULTIVERSE_LASTLOCATION -> {
-                val multiverse = Bukkit.getServer().pluginManager.getPlugin("Multiverse-Core")
-                if (multiverse != null && multiverse is MultiverseCore) {
-
-                    val mvWorld = multiverse.mvWorldManager.mvWorlds.firstOrNull {
-                        it.name == worldOrWarpName
-                    }
-
-                    if (mvWorld != null) {
-                        if (humanEntity is Player) {
-                            multiverse.teleportPlayer(humanEntity, humanEntity, mvWorld.spawnLocation)
-                            true
-                        } else fullELog(
-                            consoleMessage = "An error occurred casting HumanEntity to Player. Check if the action performer is a player.",
-                            humanEntity = humanEntity
-                        ).addReturn()
                     } else fullELog(
                         consoleMessage = "An error occurred getting mvWorld.",
                         humanEntity = humanEntity
@@ -109,17 +88,17 @@ enum class Engine {
             ESSENTIALS -> {
                 val essentials = Bukkit.getServer().pluginManager.getPlugin("Essentials")
 
-                if (mlConfig.hubWarp != null) {
+                if (!isHub || mlConfig.hubWarp != null) {
                     if (essentials != null && essentials is Essentials) {
-                        val warpName = worldOrWarpName
 
                         try {
-                            val warp = essentials.warps.getWarp(warpName)
+                            val warp = essentials.warps.getWarp(worldOrWarpName)
                             humanEntity.teleport(warp)
+                            if (bypassLastPosition) humanEntity.teleport(warp)
                             true
                         } catch (e: WarpNotFoundException) {
                             fullELog(
-                                consoleMessage = "An error occurred searching \"${warpName}\" warp.\n$e",
+                                consoleMessage = "An error occurred searching \"$worldOrWarpName\" warp.\n$e",
                                 humanEntity = humanEntity
                             ).addReturn()
                         }
@@ -128,7 +107,7 @@ enum class Engine {
                         humanEntity = humanEntity
                     ).addReturn()
                 } else fullELog(
-                    consoleMessage = "Trying to use EssentialsX as hub teleport engine with no hub-warp setted.",
+                    consoleMessage = "Trying to use EssentialsX as hub teleport engine with no hub-warp set.",
                     humanEntity = humanEntity
                 ).addReturn()
             }

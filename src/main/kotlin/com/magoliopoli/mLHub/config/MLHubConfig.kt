@@ -16,6 +16,7 @@ class MLHubConfig(private val config: FileConfiguration) {
         const val HUB_WORLD_NAME = "hub-world-name"
         const val HUB_COMMAND = "hub-command"
         const val HUB_TP_ENGINE = "hub-tp-engine"
+        const val HUB_TP_BYPASS_LAST_POSITION = "hub-tp-bypass-last-position"
         const val HUB_WARP = "hub-warp"
         const val NAVIGATION_ITEM = "navigation-item"
         const val NAVIGATION_NAME = "navigation-name"
@@ -43,6 +44,7 @@ class MLHubConfig(private val config: FileConfiguration) {
     val hubWorld: org.bukkit.World?
     val hubCommand: Boolean
     val hubTpEngine: Engine
+    val hubTpBypassLastPosition: Boolean
     val hubWarp: String?
     val navigationItem: ItemStack
     val navigationName: String
@@ -63,6 +65,7 @@ class MLHubConfig(private val config: FileConfiguration) {
 
         this.hubCommand = config.getBoolean(subPath(HUB_COMMAND))
         this.hubTpEngine = config.getEngine(subPath(HUB_TP_ENGINE))
+        this.hubTpBypassLastPosition = config.getBoolean(subPath(HUB_TP_BYPASS_LAST_POSITION))
 
         this.hubWarp = config.getString(subPath(HUB_WARP))
         if (hubWarp == null) {

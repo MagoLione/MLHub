@@ -13,24 +13,33 @@ MLHub:
   hub-world-name: your-hub-world
 
   # Do you want to enable /hub command?
+  # Default: true
   hub-command: true
 
   # Only if "hub-command" is true.
   # The TP method.
   # standard: using standard bukkit API.
   # multiverse: using Multiverse-Core spawn position.
-  # multiverse-lastLocation: using Multiverse-Core (use player last location if implemented with Multiverse).
   # essentials: using Essentials warps.
   hub-tp-engine: standard
+
+  # Only if "hub-command" is true.
+  # This teleports a player twice, so bypass the "last position" of Multiverse-Inventories.
+  # It's recommended to enable this only if you use the "last position" of Multiverse-Inventories.
+  # ATTENTION: If enabled, this may create lag in teleport.
+  # Default: false
+  hub-tp-bypass-last-position: false
 
   # Only if "hub-tp-engine" is essentials.
   # The name of your EssentialsX warp to the hub spawn point.
   hub-warp: your-hub-spawn-warp
 
   # The navigation item.
+  # Default: compass
   navigation-item: compass
 
   # The display name of the navigation item ("default-name" for the default value).
+  # Default: default-name
   navigation-name: default-name
 
   # The navigation item's lore.
@@ -45,8 +54,9 @@ MLHub:
   # The name of the inventory opened with the navigation item.
   inventory-name: 'Select the world!'
 
-  # The size of the inventory (default 27).
+  # The size of the inventory.
   # It must be a multiple of 9 between 9 and 54.
+  # Default: 27
   inventory-size: 27
 
   # The worlds to display in the inventory.
@@ -73,6 +83,12 @@ MLHub:
       # The TP method.
       # standard: using standard bukkit API.
       # multiverse: using Multiverse-Core spawn position.
-      # multiverse-lastLocation: using Multiverse-Core (use player last location if implemented with Multiverse).
       # essentials: using Essentials warps.
       engine: standard
+
+      # Only if "hub-command" is true.
+      # This teleports a player twice, so bypass the "last position" of Multiverse-Inventories.
+      # It's recommended to enable this only if you use the "last position" of Multiverse-Inventories.
+      # ATTENTION: If enabled, this may create lag in teleport.
+      # Default: false
+      bypass-last-position: false
