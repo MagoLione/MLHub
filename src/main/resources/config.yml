@@ -63,6 +63,7 @@ MLHub:
   worlds:
 
     # The name of the world (or the warp's one if you are using essentials as engine).
+    # Can be random if the enabled option is false.
     example:
 
       # The name of the item used to teleport to the world.
@@ -80,13 +81,18 @@ MLHub:
       # "-1" for the first free slot (recommended).
       position: -1
 
-      # The TP method.
+      # Is the teleport enabled for this world?
+      # Default: true
+      enabled: true
+
+      # Only if enabled is true.
+      # The teleport method.
       # standard: using standard bukkit API.
       # multiverse: using Multiverse-Core spawn position.
       # essentials: using Essentials warps.
       engine: standard
 
-      # Only if "hub-command" is true.
+      # Only if enabled is true.
       # This teleports a player twice, so bypass the "last position" of Multiverse-Inventories.
       # It's recommended to enable this only if you use the "last position" of Multiverse-Inventories.
       # ATTENTION: If enabled, this may create lag in teleport.

@@ -124,7 +124,7 @@ class MyListener(private val mlConfig: MLHubConfig): Listener {
                 mlConfig.worlds.forEach {world ->
                     if (world.isItemEquals(clickedItem)) {
 
-                        world.tpByEngine(mlConfig, player)
+                        world.safeTpByEngine(mlConfig, player)
                     }
                 }
             }

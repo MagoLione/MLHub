@@ -16,6 +16,7 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
         const val ITEM_LORE = "item-lore"
         const val ITEM = "item"
         const val POSITION = "position"
+        const val ENABLED = "enabled"
         const val ENGINE = "engine"
         const val BYPASS_LAST_POSITION = "bypass-last-position"
     }
@@ -25,6 +26,7 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
     val itemLore: List<String>
     val item: ItemStack
     val position: Int
+    val enabled: Boolean
     val engine: Engine
     val bypassLastPosition: Boolean
 
@@ -51,12 +53,15 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
         ).addReturn(ItemStack(Material.GRASS_BLOCK))
 
         this.position = config.getInt(subPath(POSITION))
+        this.enabled = config.getBoolean(subPath(ENABLED))
         this.engine = config.getEngine(subPath(ENGINE), "$ENGINE (in $worldOrWarpName)")
         this.bypassLastPosition = config.getBoolean(subPath(BYPASS_LAST_POSITION))
     }
 
-    fun tpByEngine(mlConfig: MLHubConfig, humanEntity: HumanEntity): Boolean {
-        return this.engine.tpByEngine(mlConfig, humanEntity, worldOrWarpName, bypassLastPosition)
+    fun safeTpByEngine(mlConfig: MLHubConfig, humanEntity: HumanEntity): Boolean {
+        return if (this.enabled) {
+            this.engine.tpByEngine(mlConfig, humanEntity, worldOrWarpName, bypassLastPosition)
+        } else false
     }
 
     fun isItemEquals(displayName: String?, lore: List<String>?, material: Material): Boolean {
