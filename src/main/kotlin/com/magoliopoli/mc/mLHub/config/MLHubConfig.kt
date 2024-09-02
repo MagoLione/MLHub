@@ -1,7 +1,7 @@
-package com.magoliopoli.mLHub.config
+package com.magoliopoli.mc.mLHub.config
 
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
-import com.magoliopoli.mLHub.config.Engine.Companion.getEngine
+import com.magoliopoli.mc.mLHub.Log
+import com.magoliopoli.mc.mLHub.config.Engine.Companion.getEngine
 import org.bukkit.Bukkit.getServer
 import org.bukkit.Bukkit.getWorld
 import org.bukkit.ChatColor
@@ -28,6 +28,10 @@ class MLHubConfig(private val config: FileConfiguration) {
 
         const val COLOR_PREFIX = '&'
 
+        private fun subPath(string: String): String {
+            return "$MAIN_PATH.$string"
+        }
+
         fun available(config: FileConfiguration): Boolean {
             return getWorld(config.getString("$MAIN_PATH.$HUB_WORLD_NAME").toString()) != null
         }
@@ -41,65 +45,47 @@ class MLHubConfig(private val config: FileConfiguration) {
         }
     }
 
-    val hubWorld: org.bukkit.World?
-    val hubCommand: Boolean
-    val hubTpEngine: Engine
-    val hubTpBypassLastPosition: Boolean
-    val hubWarp: String?
-    val navigationItem: ItemStack
-    val navigationName: String
-    val navigationLore: List<String>
-    val navigationPosition: Int
-    val inventoryName: String
-    val inventorySize: Int
+    val hubWorld: org.bukkit.World? = getWorld(config.getString((subPath(HUB_WORLD_NAME))).toString()) ?: Log.e(
+        message = "World '${config.getString((subPath(HUB_WORLD_NAME))).toString()}' not found. Using the first world.",
+        invalidValue = "hub-world-name"
+    ).addReturn(
+        getServer().worlds.firstOrNull() ?: Log.e(
+            message = "No worlds found."
+        ).addReturn(null))
+    val hubCommand: Boolean = config.getBoolean(subPath(HUB_COMMAND))
+    val hubTpEngine: Engine = config.getEngine(subPath(HUB_TP_ENGINE))
+    val hubTpBypassLastPosition: Boolean = config.getBoolean(subPath(HUB_TP_BYPASS_LAST_POSITION))
+    val hubWarp: String? = config.getString(subPath(HUB_WARP))
+    val navigationItem: ItemStack = config.getItemStackByString(subPath(NAVIGATION_ITEM)) ?: Log.w(
+        message = "Using compass.",
+        invalidValue = "navigation-item"
+    ).addReturn(ItemStack(Material.COMPASS))
+    val navigationName: String = config.getString(subPath(NAVIGATION_NAME)) ?: Log.w(
+        message = "Using item's default.",
+        invalidValue = "navigation-name"
+    ).addReturn(navigationItem.type.name)
+    val navigationLore: List<String> = config.getList(subPath(NAVIGATION_LORE))?.map {
+        it.toString()
+    } ?: Log.v(
+        message = "Leaving it empty.",
+        invalidValue = "navigation-lore"
+    ).addReturn(emptyList())
+    val navigationPosition: Int = config.getInt(subPath(NAVIGATION_POSITION))
+    val inventoryName: String = config.getString(subPath(INVENTORY_NAME)) ?: Log.w(
+        message = "Leaving it empty.",
+        invalidValue = "inventory-name"
+    ).addReturn("")
+    val inventorySize: Int = config.getInt(subPath(INVENTORY_SIZE))
     val worlds: List<World>
 
     init {
-        this.hubWorld = getWorld(config.getString((subPath(HUB_WORLD_NAME))).toString()) ?: Log.e(
-            message = "World '${config.getString((subPath(HUB_WORLD_NAME))).toString()}' not found. Using the first world.",
-            invalidValue = "hub-world-name"
-        ).addReturn(
-            getServer().worlds.firstOrNull() ?: Log.e(
-                message = "No worlds found."
-            ).addReturn(null))
-
-        this.hubCommand = config.getBoolean(subPath(HUB_COMMAND))
-        this.hubTpEngine = config.getEngine(subPath(HUB_TP_ENGINE))
-        this.hubTpBypassLastPosition = config.getBoolean(subPath(HUB_TP_BYPASS_LAST_POSITION))
-
-        this.hubWarp = config.getString(subPath(HUB_WARP))
-        if (hubWarp == null) {
+        if (hubWarp == null && hubTpEngine == Engine.ESSENTIALS) {
             Log.w(
                 message = "You can't use EssentialsX as hub teleport engine.",
                 invalidValue = "hub-warp"
             )
         }
 
-        this.navigationItem = config.getItemStackByString(subPath(NAVIGATION_ITEM)) ?: Log.w(
-            message = "Using compass.",
-            invalidValue = "navigation-item"
-        ).addReturn(ItemStack(Material.COMPASS))
-
-        this.navigationName = config.getString(subPath(NAVIGATION_NAME)) ?: Log.w(
-            message = "Using item's default.",
-            invalidValue = "navigation-name"
-        ).addReturn(navigationItem.type.name)
-
-        this.navigationLore = config.getList(subPath(NAVIGATION_LORE))?.map {
-            it.toString()
-        } ?: Log.v(
-            message = "Leaving it empty.",
-            invalidValue = "navigation-lore"
-        ).addReturn(emptyList())
-
-        this.navigationPosition = config.getInt(subPath(NAVIGATION_POSITION))
-
-        this.inventoryName = config.getString(subPath(INVENTORY_NAME)) ?: Log.w(
-            message = "Leaving it empty.",
-            invalidValue = "inventory-name"
-        ).addReturn("")
-
-        this.inventorySize = config.getInt(subPath(INVENTORY_SIZE))
         val keys = config.getKeys(true)
         val worldsStrings = mutableSetOf<String>()
         keys.map {
@@ -113,10 +99,6 @@ class MLHubConfig(private val config: FileConfiguration) {
         this.worlds = worldsStrings.map {
             World(config = config, mainPath = "$MAIN_PATH.$WORLDS", world = it)
         }
-    }
-
-    private fun subPath(string: String): String {
-        return "$MAIN_PATH.$string"
     }
 
     fun isNavigationItemEquals(displayName: String?, lore: List<String>?, material: Material): Boolean {

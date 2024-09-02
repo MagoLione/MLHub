@@ -1,10 +1,10 @@
-package com.magoliopoli.mLHub.config
+package com.magoliopoli.mc.mLHub.config
 
 import com.earth2me.essentials.Essentials
 import com.earth2me.essentials.commands.WarpNotFoundException
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log.Companion.fullELog
-import com.magoliopoli.mLHub.config.MLHubConfig.Companion.HUB_TP_ENGINE
+import com.magoliopoli.mc.mLHub.Log
+import com.magoliopoli.mc.mLHub.Log.Companion.fullELog
+import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.HUB_TP_ENGINE
 import com.onarandombox.MultiverseCore.MultiverseCore
 import org.bukkit.Bukkit
 import org.bukkit.Sound

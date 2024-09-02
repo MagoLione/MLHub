@@ -1,4 +1,4 @@
-package com.magoliopoli.mLHub.com.magoliopoli.mLHub
+package com.magoliopoli.mc.mLHub
 
 import org.bukkit.Bukkit.getLogger
 import org.bukkit.ChatColor

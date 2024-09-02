@@ -1,12 +1,11 @@
-package com.magoliopoli.mLHub
+package com.magoliopoli.mc.mLHub
 
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.HubCommand
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.CMDS_PREFIX
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.HUB
-import com.magoliopoli.mLHub.config.MLHubConfig
-import com.magoliopoli.mLHub.config.MLHubConfig.Companion.INVENTORY_SIZE
+import com.magoliopoli.mc.mLHub.cmds.HubCommand
+import com.magoliopoli.mc.mLHub.cmds.MainCommands
+import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.CMDS_PREFIX
+import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.HUB
+import com.magoliopoli.mc.mLHub.config.MLHubConfig
+import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.INVENTORY_SIZE
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.inventory.Inventory
@@ -24,7 +23,7 @@ class MLHub : JavaPlugin() {
     }
 
     fun enable(
-        onInventoryCreation: (mlConfig: MLHubConfig) -> MyListener = {mlConfig ->
+        onInventoryCreation: (mlConfig: MLHubConfig) -> MyListener = { mlConfig ->
             val listener = MyListener(mlConfig)
             server.pluginManager.registerEvents(listener, this)
             listener

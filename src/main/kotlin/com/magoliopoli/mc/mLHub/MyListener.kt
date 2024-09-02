@@ -1,9 +1,9 @@
-package com.magoliopoli.mLHub
+package com.magoliopoli.mc.mLHub
 
-import com.magoliopoli.mLHub.MLHub.Companion.HUB_INVENTORY_ACCESS
-import com.magoliopoli.mLHub.MLHub.Companion.PERMS_PREFIX
-import com.magoliopoli.mLHub.MLHub.Companion.navigationItem
-import com.magoliopoli.mLHub.config.MLHubConfig
+import com.magoliopoli.mc.mLHub.MLHub.Companion.HUB_INVENTORY_ACCESS
+import com.magoliopoli.mc.mLHub.MLHub.Companion.PERMS_PREFIX
+import com.magoliopoli.mc.mLHub.MLHub.Companion.navigationItem
+import com.magoliopoli.mc.mLHub.config.MLHubConfig
 import org.bukkit.ChatColor
 import org.bukkit.entity.HumanEntity
 import org.bukkit.event.EventHandler

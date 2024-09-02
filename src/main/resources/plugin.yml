@@ -1,7 +1,8 @@
 name: MLHub
 version: '1.0.0-SNAPSHOT'
-main: com.magoliopoli.mLHub.MLHub
+main: com.magoliopoli.mc.mLHub.MLHub
 api-version: '1.21'
+prefix: MLHub
 authors: [ MagoLione ]
 description: A dull hub plugin.
 website: https://magoliopoli.com

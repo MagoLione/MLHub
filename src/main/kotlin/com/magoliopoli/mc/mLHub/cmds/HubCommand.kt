@@ -1,9 +1,9 @@
-package com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds
+package com.magoliopoli.mc.mLHub.cmds
 
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log.Companion.fullELog
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.HUB
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds.MainCommands.Companion.PERMS_PREFIX
-import com.magoliopoli.mLHub.config.MLHubConfig
+import com.magoliopoli.mc.mLHub.Log.Companion.fullELog
+import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.HUB
+import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.PERMS_PREFIX
+import com.magoliopoli.mc.mLHub.config.MLHubConfig
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

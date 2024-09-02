@@ -1,6 +1,6 @@
-package com.magoliopoli.mLHub.com.magoliopoli.mLHub.cmds
+package com.magoliopoli.mc.mLHub.cmds
 
-import com.magoliopoli.mLHub.MLHub
+import com.magoliopoli.mc.mLHub.MLHub
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -32,29 +32,23 @@ class MainCommands(private val mlHub: MLHub): CommandExecutor, TabCompleter {
             }
 
             fun conditions(
-                command: String,
+                commands: List<String>,
                 argsSize: Int = 1,
                 tab: Boolean = false,
                 permsPrefix: String? = PERMS_PREFIX
             ): Boolean {
-                return if (permsPrefix != null) {
-                    if (tab) {
-                        args.size == argsSize &&
-                                sender.hasPermission("$permsPrefix.$command")
-                    } else {
-                        args.size == argsSize &&
-                                args[0].equals(command, ignoreCase = true) &&
-                                sender.hasPermission("$permsPrefix.$command")
-                    }
+                val senderHasPermission = if (permsPrefix != null) {
+                    sender.hasPermission("$permsPrefix.${commands.joinToString(separator = ".")}")
                 } else {
-                    if (tab) {
-                        args.size == argsSize &&
-                                sender.hasPermission(command)
-                    } else {
-                        args.size == argsSize &&
-                                args[0].equals(command, ignoreCase = true) &&
-                                sender.hasPermission(command)
-                    }
+                    sender.hasPermission(commands.joinToString(separator = "."))
+                }
+                return if (tab) {
+                    args.size == argsSize &&
+                            senderHasPermission
+                } else {
+                    args.size == argsSize &&
+                            args.map { it.lowercase() } == commands.map { it.lowercase() } &&
+                            senderHasPermission
                 }
             }
         }
@@ -75,12 +69,11 @@ class MainCommands(private val mlHub: MLHub): CommandExecutor, TabCompleter {
         label: String,
         args: Array<out String>
     ): Boolean {
-        val cmdInfo = CommandInfo(sender, args)
-
         return if (command.name.equals(CMDS_PREFIX, ignoreCase = true)) {
+            val cmdInfo = CommandInfo(sender, args)
 
             // RELOAD
-            if (cmdInfo.conditions(RELOAD, 1)) {
+            if (cmdInfo.conditions(listOf(RELOAD), 1)) {
                 mlHub.reloadConfig()
 
                 mlHub.enable()
@@ -102,7 +95,7 @@ class MainCommands(private val mlHub: MLHub): CommandExecutor, TabCompleter {
             val cmdInfo = CommandInfo(sender, args)
 
             // RELOAD
-            if (cmdInfo.conditions(RELOAD, 1,true)) {
+            if (cmdInfo.conditions(listOf(RELOAD), 1,true)) {
                 suggestions.add(RELOAD)
             }
         }

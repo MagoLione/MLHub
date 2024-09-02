@@ -1,9 +1,9 @@
-package com.magoliopoli.mLHub.config
+package com.magoliopoli.mc.mLHub.config
 
-import com.magoliopoli.mLHub.com.magoliopoli.mLHub.Log
-import com.magoliopoli.mLHub.config.Engine.Companion.getEngine
-import com.magoliopoli.mLHub.config.MLHubConfig.Companion.getItemStackByString
-import com.magoliopoli.mLHub.config.MLHubConfig.Companion.stripColorCodes
+import com.magoliopoli.mc.mLHub.Log
+import com.magoliopoli.mc.mLHub.config.Engine.Companion.getEngine
+import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.getItemStackByString
+import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.stripColorCodes
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.HumanEntity
