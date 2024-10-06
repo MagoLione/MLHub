@@ -3,14 +3,14 @@ package com.magoliopoli.mc.mLHub.cmds
 import com.magoliopoli.mc.mLHub.Log.Companion.fullELog
 import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.HUB
 import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.PERMS_PREFIX
-import com.magoliopoli.mc.mLHub.config.MLHubConfig
+import com.magoliopoli.mc.mLHub.config.MLConfig
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class HubCommand(private val mlConfig: MLHubConfig): CommandExecutor {
+class HubCommand(private val mlConfig: MLConfig): CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
 

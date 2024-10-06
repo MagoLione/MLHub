@@ -4,8 +4,8 @@ import com.magoliopoli.mc.mLHub.cmds.HubCommand
 import com.magoliopoli.mc.mLHub.cmds.MainCommands
 import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.CMDS_PREFIX
 import com.magoliopoli.mc.mLHub.cmds.MainCommands.Companion.HUB
-import com.magoliopoli.mc.mLHub.config.MLHubConfig
-import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.INVENTORY_SIZE
+import com.magoliopoli.mc.mLHub.config.MLConfig
+import com.magoliopoli.mc.mLHub.config.MLConfig.Companion.INVENTORY_SIZE
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.inventory.Inventory
@@ -23,15 +23,15 @@ class MLHub : JavaPlugin() {
     }
 
     fun enable(
-        onInventoryCreation: (mlConfig: MLHubConfig) -> MyListener = { mlConfig ->
+        onInventoryCreation: (mlConfig: MLConfig) -> MyListener = { mlConfig ->
             val listener = MyListener(mlConfig)
             server.pluginManager.registerEvents(listener, this)
             listener
         }
     ) {
 
-        if (MLHubConfig.available(config)) {
-            val mlConfig = MLHubConfig(config)
+        if (MLConfig.available(config)) {
+            val mlConfig = MLConfig(config)
 
             val inventorySize = if (mlConfig.inventorySize % 9 == 0 && mlConfig.inventorySize / 9 <= 6) {
                 mlConfig.inventorySize

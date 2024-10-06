@@ -3,7 +3,7 @@ package com.magoliopoli.mc.mLHub
 import com.magoliopoli.mc.mLHub.MLHub.Companion.HUB_INVENTORY_ACCESS
 import com.magoliopoli.mc.mLHub.MLHub.Companion.PERMS_PREFIX
 import com.magoliopoli.mc.mLHub.MLHub.Companion.navigationItem
-import com.magoliopoli.mc.mLHub.config.MLHubConfig
+import com.magoliopoli.mc.mLHub.config.MLConfig
 import org.bukkit.ChatColor
 import org.bukkit.entity.HumanEntity
 import org.bukkit.event.EventHandler
@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerRespawnEvent
 import org.bukkit.inventory.ItemStack
 
-class MyListener(private val mlConfig: MLHubConfig): Listener {
+class MyListener(private val mlConfig: MLConfig): Listener {
 
     fun getNavigationItem(): ItemStack {
         val navigationItem = mlConfig.navigationItem
@@ -70,7 +70,6 @@ class MyListener(private val mlConfig: MLHubConfig): Listener {
     @EventHandler
     fun onPlayerInteract(event: PlayerInteractEvent) {
         if ((event.action == Action.RIGHT_CLICK_BLOCK || event.action == Action.RIGHT_CLICK_AIR) && event.player.world.name == mlConfig.hubWorld?.name) {
-
             val item = event.item
             if (item == navigationItem) {
                 event.player.openInventory(MLHub.inventory)

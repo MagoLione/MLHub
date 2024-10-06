@@ -9,7 +9,7 @@ import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.inventory.ItemStack
 
-class MLHubConfig(private val config: FileConfiguration) {
+class MLConfig(private val config: FileConfiguration) {
 
     companion object {
         const val MAIN_PATH = "MLHub"
@@ -33,7 +33,7 @@ class MLHubConfig(private val config: FileConfiguration) {
         }
 
         fun available(config: FileConfiguration): Boolean {
-            return getWorld(config.getString("$MAIN_PATH.$HUB_WORLD_NAME").toString()) != null
+            return getWorld(config.getString(subPath(HUB_WORLD_NAME)).toString()) != null
         }
 
         fun FileConfiguration.getItemStackByString(path: String): ItemStack? {

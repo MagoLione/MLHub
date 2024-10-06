@@ -2,8 +2,8 @@ package com.magoliopoli.mc.mLHub.config
 
 import com.magoliopoli.mc.mLHub.Log
 import com.magoliopoli.mc.mLHub.config.Engine.Companion.getEngine
-import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.getItemStackByString
-import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.stripColorCodes
+import com.magoliopoli.mc.mLHub.config.MLConfig.Companion.getItemStackByString
+import com.magoliopoli.mc.mLHub.config.MLConfig.Companion.stripColorCodes
 import org.bukkit.Material
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.HumanEntity
@@ -58,7 +58,7 @@ class World(config: FileConfiguration, mainPath: String, world: String) {
         this.bypassLastPosition = config.getBoolean(subPath(BYPASS_LAST_POSITION))
     }
 
-    fun safeTpByEngine(mlConfig: MLHubConfig, humanEntity: HumanEntity): Boolean {
+    fun safeTpByEngine(mlConfig: MLConfig, humanEntity: HumanEntity): Boolean {
         return if (this.enabled) {
             this.engine.tpByEngine(mlConfig, humanEntity, worldOrWarpName, bypassLastPosition)
         } else false

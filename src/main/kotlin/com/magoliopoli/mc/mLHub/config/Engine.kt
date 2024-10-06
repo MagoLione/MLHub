@@ -4,7 +4,7 @@ import com.earth2me.essentials.Essentials
 import com.earth2me.essentials.commands.WarpNotFoundException
 import com.magoliopoli.mc.mLHub.Log
 import com.magoliopoli.mc.mLHub.Log.Companion.fullELog
-import com.magoliopoli.mc.mLHub.config.MLHubConfig.Companion.HUB_TP_ENGINE
+import com.magoliopoli.mc.mLHub.config.MLConfig.Companion.HUB_TP_ENGINE
 import com.onarandombox.MultiverseCore.MultiverseCore
 import org.bukkit.Bukkit
 import org.bukkit.Sound
@@ -44,7 +44,7 @@ enum class Engine {
     }
 
     fun tpByEngine(
-        mlConfig: MLHubConfig,
+        mlConfig: MLConfig,
         humanEntity: HumanEntity,
         worldOrWarpName: String,
         bypassLastPosition: Boolean,
